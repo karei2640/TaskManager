@@ -1,17 +1,33 @@
-
-
 <% content_for :content do %>
   <h1>タスク一覧</h1>
 
-  <% @tasks.each do |task| %>
-    <div>
-      <h3><%= task.title %></h3>
-      <p><%= task.description %></p>
-      <p>優先度: <%= task.priority %></p>
-      <p>期限: <%= task.due_date %></p>
-      <%= link_to "詳細", task_path(task) %>
+  <div class="calendar">
+    <div class="calendar-navigation">
+      <%= link_to "<< 前の月", tasks_path(month: @current_month.prev_month), class: "calendar-navigation-link" %>
+      <%= link_to "次の月 >>", tasks_path(month: @next_month), class: "calendar-navigation-link" %>
+      <h2><%= @current_month.strftime("%Y年%m月") %></h2>
+      
+    </div>
+
+    <% @tasks.group_by { |task| task.due_date.beginning_of_month }.sort.each do |month, tasks| %>
+    <% if month == @current_month.beginning_of_month %>
+      <div class="month-column active">
+    <% else %>
+      <div class="month-column">
+    <% end %>
+      <% tasks.each do |task| %>
+        <% if task.due_date.beginning_of_month == month %>
+          <div class="task">
+            <h3><%= link_to task.due_date.strftime("%Y年%m月%d日"), task_path(task) %></h3>
+            <h4><%= task.title %></h4>
+            <p><%= task.description %></p>
+            <p>優先度: <%= task.priority %></p>
+          </div>
+        <% end %>
+      <% end %>
     </div>
   <% end %>
+  </div>
 
   <%= link_to "新しいタスク作成", new_task_path %>
 <% end %>

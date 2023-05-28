@@ -1,7 +1,14 @@
 class TasksController < ApplicationController
+    before_action :set_task, only: [:show, :edit, :update, :destroy]
 
     def index
-        @tasks = Task.all
+        @current_month = params[:month] ? Date.parse(params[:month]) : Date.current.beginning_of_month
+        @tasks = Task.where(due_date: @current_month.beginning_of_month..@current_month.end_of_month).order(:due_date)
+        @next_month = @current_month.next_month
+    end
+
+    def show
+        @task = Task.find(params[:id])
     end
 
     def new
@@ -36,8 +43,14 @@ class TasksController < ApplicationController
         redirect_to tasks_path, notice: "タスクが削除されました。"
     end
     
+    
     private
     
+    def set_task
+        @task = Task.find(params[:id])
+    end
+    
+
     def task_params
     params.require(:task).permit(:title, :description, :priority, :due_date)
     end

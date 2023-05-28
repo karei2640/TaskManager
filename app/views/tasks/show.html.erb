@@ -1,17 +1,18 @@
-<% content_for :title, "タスク詳細" %>
-
 <% content_for :content do %>
   <h1>タスク詳細</h1>
 
   <div>
     <h3><%= @task.title %></h3>
-    <p><%= @task.description %></p>
     <p>優先度: <%= @task.priority %></p>
     <p>期限: <%= @task.due_date %></p>
+    <p><%= @task.description %></p>
+    
   </div>
 
-  <%= link_to "編集", edit_task_path(@task), class: "btn btn-primary" %>
-  <%= link_to "削除", task_path(@task), method: :delete, data: { confirm: "本当に削除しますか?" }, class: "btn btn-danger" %>
+  <div style="display: flex; align-items: center;">
+    <%= link_to "編集", edit_task_path(@task), class: "btn btn-primary" %>
+    <%= button_to "削除", task_path(@task.id), method: :delete, remote: true, data: { confirm: "本当に削除しますか?" }, class: "btn btn-danger", style: "margin-left: 10px;" %>
+  </div>
 <% end %>
 
 <%= render template: "layouts/application" %>
