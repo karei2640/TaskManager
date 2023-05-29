@@ -1,24 +1,10 @@
-# README
+# タスク管理アプリ（練習用で作成）のREADME
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+このタスク管理アプリは、タスクを作成・編集・削除し、日付ごとに表示することができます。また、カレンダービューを使用して月ごとのタスクを表示することもできます。
 
-Things you may want to cover:
+## 機能
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- タスクの作成: 新しいタスクを作成することができます。
+- タスクの編集: 既存のタスクを編集することができます。
+- タスクの削除: タスクを削除することができます。
+- タスクの表示: 日付ごとにタスクを表示することができます。
