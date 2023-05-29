@@ -2,8 +2,11 @@ class TasksController < ApplicationController
     before_action :set_task, only: [:show, :edit, :update, :destroy]
 
     def index
-        @current_month = params[:month] ? Date.parse(params[:month]) : Date.current.beginning_of_month
+        year = Time.current.year
+        month = params[:month].to_i if params[:month].present?
+        @current_month = Date.new(year, month, 1) rescue Date.current.beginning_of_month
         @tasks = Task.where(due_date: @current_month.beginning_of_month..@current_month.end_of_month).order(:due_date)
+        @prev_month = @current_month.prev_month
         @next_month = @current_month.next_month
     end
 
