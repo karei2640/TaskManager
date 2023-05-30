@@ -9,6 +9,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
       <%= link_to "タスク一覧", tasks_path, class: "navbar-brand" %>
+      <%= link_to "プロジェクト一覧", projects_path, class: "navbar-brand" %> <!-- 追加のリンク -->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -16,6 +17,9 @@
         <ul class="navbar-nav">
           <li class="nav-item">
             <%= link_to "新しいタスク作成", new_task_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "新しいプロジェクト作成", new_project_path, class: "nav-link" %>
           </li>
         </ul>
       </div>

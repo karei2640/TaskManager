@@ -1,0 +1,10 @@
+<% content_for :content do %>
+<h1><%= @project.title %></h1>
+
+<p><%= @project.description %></p>
+
+<p><strong>期限:</strong> <%= @project.due_date.strftime('%Y年%m月%d日') %></p>
+
+<%= link_to '編集', edit_project_path(@project) %> |
+<%= link_to '削除', project_path(@project), method: :delete, data: { confirm: '本当に削除しますか?' } %>
+<% end %>

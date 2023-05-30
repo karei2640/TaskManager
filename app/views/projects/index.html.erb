@@ -1,0 +1,34 @@
+<% content_for :content do %>
+
+  <div class="container">
+    <h1>プロジェクト一覧</h1>
+
+<div class="calendar">
+    <div class="calendar-navigation">
+      <%= link_to "<< 前の月", projects_path(year: @prev_month.year, month: @prev_month.month), class: "calendar-navigation-link" %>
+      <%= link_to "次の月 >>", projects_path(year: @next_month.year, month: @next_month.month), class: "calendar-navigation-link" %>
+      <h2><%= @current_month.strftime("%Y年%m月") %></h2>
+      <%= form_tag projects_path, method: :get, id: "month-select-form" do %>
+        <%= select_month(@current_month, {use_two_digit_numbers: true}, {name: "month", id: "month-select"}) %>
+        <%= submit_tag "移動" %>
+      <% end %>
+    </div>
+
+<% @projects.each do |project| %>
+  <div class="card">
+    <div class="card-body">      
+      <p class="card-text"><strong>期限:</strong> <%= project.due_date.strftime('%Y年%m月%d日') %>（<%= (project.due_date.to_date - Date.today).to_i %>日後）</p>
+      <h5 class="card-title"><%= link_to project.title, project_path(project) %></h5>
+      <p class="card-text"><%= project.description %></p>
+    </div>
+  </div>
+  <br>
+<% end %>
+<% if @projects.empty? %>
+  <p>プロジェクトはありません</p>
+<% end %>
+  </div>
+ <%= link_to "新しいプロジェクト作成", new_project_path %>
+<% end %>
+
+<%= render template: "layouts/application" %>

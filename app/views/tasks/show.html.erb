@@ -4,7 +4,7 @@
   <div>
     <h3><%= @task.title %></h3>
     <p>優先度: <%= @task.priority %></p>
-    <p>期限: <%= @task.due_date %></p>
+    <p>期限: <%= @task.due_date.strftime('%Y年%m月%d日') %></p>
     <p><%= @task.description %></p>
     
   </div>
